@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish 1:1</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --bg: #F2F0E9; /* Bone White */
+            --ink: #121212; /* Off Black */
+            --accent: #FF4D00; /* Industrial Orange */
+            --line-width: 2px; 
+            --spacing: 2rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, .display-font, .price-font {
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: clamp(3.5rem, 11vw, 8.5rem);
+            line-height: 0.85;
+            margin-bottom: var(--spacing);
+            margin-left: -4px; 
+        }
+
+        h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+
+        .fine-print {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.6;
+        }
+
+        /* --- LAYOUT --- */
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            border-left: var(--line-width) solid var(--ink);
+            border-right: var(--line-width) solid var(--ink);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .border-bottom { border-bottom: var(--line-width) solid var(--ink); }
+
+        header {
+            padding: 1.5rem var(--spacing);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* --- SECTIONS --- */
+        .box { padding: var(--spacing); }
+        
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 768px) {
+            .split-section { grid-template-columns: 1.2fr 0.8fr; }
+            .border-right-md { border-right: var(--line-width) solid var(--ink); }
+        }
+
+        /* --- HERO ELEMENTS --- */
+        .sticker {
+            background: var(--accent);
+            color: white;
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transform: rotate(-2deg);
+            margin-bottom: 2rem;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        /* --- MARQUEE --- */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: var(--line-width) solid var(--ink);
+            border-bottom: var(--line-width) solid var(--ink);
+            padding: 0.8rem 0;
+            background: var(--ink);
+            color: var(--bg);
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 25s linear infinite;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .marquee-content::after {
+            content: attr(data-text);
+            padding-left: 2rem;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- PRICING SPECIFIC --- */
+        .pricing-alert {
+            display: inline-block;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .big-price {
+            font-size: 4.5rem;
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            opacity: 0.4;
+            font-size: 1.5rem;
+            margin-left: 10px;
+            font-weight: 400;
+        }
+
+        /* Bundle Table */
+        .bundle-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 1rem 0;
+            border-bottom: 1px dashed #ccc;
+            font-family: 'Space Grotesk', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .bundle-item:last-child { border-bottom: none; }
+        .bundle-item:hover .bundle-name { color: var(--accent); }
+
+        .bundle-name { font-weight: 700; font-size: 1.1rem; transition: color 0.2s; }
+        .bundle-meta { font-size: 0.85rem; opacity: 0.6; font-family: 'Inter', sans-serif; display: block; margin-top: 4px;}
+        .bundle-price { font-weight: 700; font-size: 1.1rem; }
+
+        /* --- BUTTONS --- */
+        .btn-primary {
+            display: inline-block;
+            margin-top: 2rem;
+            background: var(--ink);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, background 0.2s;
+            border: 2px solid var(--ink);
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background: var(--bg);
+            color: var(--ink);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 var(--ink);
+        }
+
+        /* --- FORM & CALENDAR AREA --- */
+        .form-container {
+            padding: calc(var(--spacing) * 2) var(--spacing);
+            background: white;
+            min-height: 600px; /* Ensures space for calendar */
+        }
+        
+        #cal-embed {
+            width: 100%; 
+            height: 100%; 
+            overflow: scroll;
+        }
+
+        .hidden { display: none; }
+        
+        @media (max-width: 600px) {
+            :root { --spacing: 1.2rem; }
+            .big-price { font-size: 3.5rem; }
+        }
+    </style>
+
+    <!-- CAL.COM SNIPPET -->
+    <script>
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, arguments) : p(cal, arguments); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    
+    Cal("init", "learn-spanish-in-eindhoven", {origin:"https://cal.com"});
+    
+    // FIXED LINE BELOW: Using ["brackets"] instead of .dots handles hyphens correctly
+    Cal.ns["learn-spanish-in-eindhoven"]("ui", {"styles":{"branding":{"brandColor":"#FF4D00"}},"hideEventTypeDetails":false,"layout":"month_view"});
+    </script>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <!-- HEADER -->
+        <header class="border-bottom">
+            <div class="fine-print">Est. 2025</div>
+            <div class="fine-print">Eindhoven, NL</div>
+        </header>
+
+        <!-- HERO -->
+        <section class="box border-bottom" style="padding-bottom: 3rem;">
+            <div class="sticker">Limited Availability</div>
+            <h1>Speak<br>Spanish<br><span style="color: var(--accent); margin-left: 8vw;">Real. Fast.</span></h1>
+            <p style="max-width: 480px; font-size: 1.1rem; margin-top: 1rem;">
+                No childish apps. No crowded classrooms. Just tailored, 1-on-1 conversation designed for professionals in Eindhoven.
+            </p>
+            
+            <!-- NEW HERO BUTTON (Triggers Popup) -->
+            <button class="btn-primary" data-cal-link="learn-spanish-in-eindhoven" data-cal-config='{"layout":"month_view"}'>
+                Book Intro Session &rarr;
+            </button>
+        </section>
+
+        <!-- MARQUEE -->
+        <div class="marquee-container">
+            <div class="marquee-content" data-text="EARLY BIRD PRICING • €10/30MIN FOR NEW STUDENTS • STRIJP-S • ONLINE • CENTER • NO TEXTBOOKS • €10/30MIN">
+                EARLY BIRD PRICING &nbsp;&bull;&nbsp; €10/30MIN FOR NEW STUDENTS &nbsp;&bull;&nbsp; STRIJP-S &nbsp;&bull;&nbsp; ONLINE &nbsp;&bull;&nbsp; CENTER &nbsp;&bull;&nbsp; NO TEXTBOOKS &nbsp;&bull;&nbsp; €10/30MIN &nbsp;&bull;&nbsp;
+            </div>
+        </div>
+
+        <!-- PRICING & BUNDLES -->
+        <section class="split-section border-bottom">
+            
+            <!-- Left: Hourly Rate -->
+            <div class="box border-right-md" style="background-color: #fff;">
+                <h2 class="display-font">Current Rate</h2>
+                
+                <div style="margin-top: 2rem;">
+                    <span class="pricing-alert">Limited Time Offer</span>
+                    <div class="price-font">
+                        <span class="big-price">€10</span><span class="old-price">€22.50</span>
+                        <span style="font-size: 1rem; display:block; margin-top: -5px;">per 30 minutes</span>
+                    </div>
+                    
+                    <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8;">
+                        I am building my initial client base in Eindhoven. Lock in this rate now, and keep it forever as long as you remain a student.
+                    </p>
+
+                </div>
+            </div>
+
+            <!-- Right: Bundles -->
+            <div class="box" style="background-color: #EAE8E0;">
+                <h2 class="display-font">Bundles</h2>
+                <p style="font-size: 0.9rem; margin-bottom: 2rem; opacity: 0.7;">Commit to fluency and save even more.</p>
+                
+                <div class="bundles-list">
+                    <!-- Bundle 1 -->
+                    <div class="bundle-item" data-cal-link="learn-spanish-in-eindhoven">
+                        <div>
+                            <div class="bundle-name">The "Kickstarter"</div>
+                            <span class="bundle-meta">10 Sessions (5 Hours) &bull; Valid 2 months</span>
+                        </div>
+                        <div class="bundle-price">€95</div>
+                    </div>
+
+                    <!-- Bundle 2 -->
+                    <div class="bundle-item" data-cal-link="learn-spanish-in-eindhoven">
+                        <div>
+                            <div class="bundle-name">The "Deep Dive"</div>
+                            <span class="bundle-meta">20 Sessions (10 Hours) &bull; Valid 4 months</span>
+                        </div>
+                        <div class="bundle-price">€180</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOKING SECTION -->
+        <section class="form-container">
+            <div id="booking-wrapper">
+                <h2 style="margin-bottom: 1rem;">Secure your rate.</h2>
+                <p style="margin-bottom: 2rem; max-width: 600px;">
+                    Select a time below for your introductory session (€10).<br>
+                    We will discuss your goals and check your current level.
+                </p>
+                
+                <!-- Cal.com Inline Embed Container -->
+                <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline"></div>
+                
+                <script type="text/javascript">
+                  Cal("inline", {
+                    elementOrSelector:"#my-cal-inline",
+                    calLink: "learn-spanish-in-eindhoven",
+                    layout: "month_view"
+                  });
+                </script>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="border-bottom box" style="text-align: center; background: var(--ink); color: var(--bg);">
+            <p class="fine-print" style="opacity: 0.5;">&copy; 2025 Spanish Eindhoven</p>
+        </footer>
+
+    </div>
+</body>
+</html>

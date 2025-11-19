@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background optional, transparent here -->
+  
+  <!-- Rotated Sticker Background -->
+  <g transform="rotate(-5 100 100)">
+    <rect x="20" y="40" width="160" height="120" fill="#FF4D00"/>
+    <!-- Shadow effect -->
+    <path d="M180 160 L20 160 L25 165 L185 165 Z" fill="#121212" fill-opacity="0.2"/>
+    <path d="M180 40 L180 160 L185 165 L185 45 Z" fill="#121212" fill-opacity="0.2"/>
+  </g>
+  
+  <!-- Text "ES" (Español) in White -->
+  <g transform="rotate(-5 100 100)">
+    <!-- E -->
+    <path d="M55 65 H115 V80 H75 V92 H110 V107 H75 V120 H115 V135 H55 V65Z" fill="#FFFFFF"/>
+    <!-- S -->
+  </g>
+</svg>
